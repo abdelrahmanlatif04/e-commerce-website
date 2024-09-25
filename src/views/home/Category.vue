@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="text-center my-10 text-2xl">
+  <div class="text-center mt-4 text-2xl">
     Results found for
     <span class="text-blue-500 underline underline-offset-8">
       {{ category.charAt(0).toUpperCase() + category.slice(1) }}
@@ -20,7 +20,7 @@
     category
   </div>
   <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5 md:px-5"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:px-5"
     v-if="products.length"
   >
     <product-cart
