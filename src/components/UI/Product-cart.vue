@@ -6,7 +6,7 @@
       <div class="relative">
         <img
           :src="product.image"
-          class="w-full aspect-square object-contain p-14 border-b"
+          class="w-full aspect-square object-contain p-5 border-b"
         />
 
         <div
@@ -19,6 +19,12 @@
           <p class="text-sm">({{ product.rating.count }})</p>
         </div>
       </div>
+      <div
+        class="absolute right-0 top-0 bg-blue-500 text-white px-2 py-1 rounded-bl-lg cursor-pointer hover:opacity-60 smooth"
+        @click="this.$router.push(`/category/${product.category}`)"
+      >
+        {{ product.category }}
+      </div>
 
       <h2 class="text-xl font-semibold text-center">{{ product.title }}</h2>
 
@@ -30,9 +36,9 @@
         >View Details</router-link
       >
     </div>
-    <div class="hidden h-full w-full">
+    <!-- <div class="hidden h-full w-full">
       <p>{{ product.description.slice(0, 100) }}. . .</p>
-    </div>
+    </div> -->
   </div>
 </template>
 

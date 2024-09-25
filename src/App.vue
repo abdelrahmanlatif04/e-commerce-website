@@ -14,8 +14,15 @@ export default {
       user: useUserStore().user,
     };
   },
+  computed: {
+    userId() {
+      console.log("here");
+      return localStorage.getItem("userId");
+    },
+  },
   beforeCreate() {
     useProductsStore().fetchProducts();
+    useUserStore().getUserLocally();
   },
   components: { Nav },
 };

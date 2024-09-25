@@ -3,20 +3,40 @@
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
       <h2 class="text-2xl font-semibold text-center mb-6">Sign In</h2>
       <form @submit.prevent="signIn">
-        <input
-          required
-          type="email"
-          v-model="user.email"
-          placeholder="Email"
-          class="w-full px-4 py-2 border rounded mb-4 focus:outline-none"
-        />
-        <input
-          required
-          type="password"
-          v-model="user.password"
-          placeholder="Password"
-          class="w-full px-4 py-2 border rounded mb-4 focus:outline-none"
-        />
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-gray-700"
+            >Email</label
+          >
+          <input
+            type="email"
+            id="email"
+            v-model="email"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
+          <p v-if="!isEmailValid && email" class="mt-2 text-sm text-red-600">
+            Invalid Email
+          </p>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="block text-sm font-medium text-gray-700"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            v-model="password"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
+          <p
+            v-if="!isPasswordValid && password"
+            class="mt-2 text-sm text-red-600"
+          >
+            Password must be 8-32characters long only letters & numbers
+          </p>
+        </div>
         <button
           type="submit"
           class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md"
@@ -26,7 +46,10 @@
       </form>
       <div class="text-center mt-4">
         <p>Don't have an account?</p>
-        <router-link to="/sign-up" class="text-blue-500 hover:underline">
+        <router-link
+          to="/sign-up"
+          class="text-blue-500 hover:underline underline-offset-4"
+        >
           Sign up here
         </router-link>
       </div>
@@ -42,77 +65,27 @@ export default {
   data() {
     return {
       state: null,
-      user: {
-        email: null,
-        password: null,
-      },
+      email: null,
+      password: null,
     };
   },
-  methods: {
-    dataValidation() {
-      const patterns = {
-        email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-        password: /^[A-Za-z0-9]{8,32}$/,
-      };
-
-      // Validate email
-      const isEmailValid = patterns.email.test(user.email);
-      // Validate password
-      const isPasswordValid = patterns.password.test(user.password);
-
-      if (!isEmailValid) {
-        return { valid: false, message: "Invalid email format." };
-      }
-
-      if (!isPasswordValid) {
-        return {
-          valid: false,
-          message:
-            "Password must be 8-32 characters long and contain only letters and numbers.",
-        };
-      }
-
-      return { valid: true, message: "Valid input." };
+  computed: {
+    isEmailValid() {
+      const email = this.email;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email) && email;
     },
-    setUserCookie(username) {
-      document.cookie = "username=" + encodeURIComponent(username) + ";path=/";
-    },
-    signIn() {
-      if (!this.user.email || !this.user.password) {
-        this.state = "All fields are required.";
-        return;
-      }
-      // 1 validate
-
-      const url =
-        "https://ya-balash-04-default-rtdb.europe-west1.firebasedatabase.app/users.json";
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          let currentUser = null;
-          for (let id in data) {
-            if (this.user.email == data[id].email) {
-              currentUser = data[id];
-              break;
-            }
-          }
-
-          if (currentUser) {
-            if (this.user.password == currentUser.password) {
-              // put user in cookies
-              setUserCookie(currentUser.name);
-              this.state = "user entered successfully"; //temporary just for now
-              for (e in this.user) {
-                this.user[e] = null;
-              }
-            } else {
-              this.state = "Wrong password";
-              this.user.password = null;
-            }
-          } else {
-            this.state = "No user with such an email";
-          }
-        });
+    isPasswordValid() {
+      const password = this.password;
+      const lengthRegex = /^[A-Za-z0-9]{8,32}$/;
+      const hasLetter = /[A-Za-z]/;
+      const hasNumber = /[0-9]/;
+      return (
+        password &&
+        lengthRegex.test(password) &&
+        hasLetter.test(password) &&
+        hasNumber.test(password)
+      );
     },
   },
 };

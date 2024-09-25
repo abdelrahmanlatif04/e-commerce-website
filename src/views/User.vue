@@ -6,8 +6,6 @@
     <router-link to="/sign-up">sign up</router-link> |
     <router-link to="/account/5">account</router-link>
   </div>
-  <br />
-  <hr />
   <router-view></router-view>
 </template>
 

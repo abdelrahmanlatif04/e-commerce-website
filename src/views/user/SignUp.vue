@@ -78,6 +78,15 @@
         </button>
         <p class="font-semibold text-center my-2">{{ state }}</p>
       </form>
+      <div class="text-center mt-4">
+        <p>You already have an account?</p>
+        <router-link
+          to="/sign-in"
+          class="text-blue-500 hover:underline underline-offset-4"
+        >
+          Sign in here
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -120,27 +129,7 @@ export default {
   },
   methods: {
     handleSubmit() {
-      if (this.isEmailValid && this.isPasswordMatch && this.isPasswordValid) {
-        fetch(
-          "https://e-commerce-app-a727d-default-rtdb.firebaseio.com/users.json"
-        )
-          .then((res) => res.json())
-          .then((res) => {
-            let temp = true;
-            for (let id in res) {
-              if (res[id].email == this.email) {
-                temp = false;
-                break;
-              }
-            }
-            if (temp) {
-              this.store.setUserToDB(this.name, this.email, this.password);
-              this.state = "user added successfully";
-            } else {
-              this.state = "this email is already used";
-            }
-          });
-      }
+      // if (this.isEmailValid && this.isPasswordMatch && this.isPasswordValid)
     },
   },
 };
