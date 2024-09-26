@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import productCart from "../../components/UI/Product-cart.vue";
+import productCart from "../components/UI/Product-cart.vue";
 export default {
   data() {
     return {
@@ -48,7 +48,7 @@ export default {
       state: "Loading. . .",
     };
   },
-  mounted() {
+  beforeMount() {
     this.getData();
   },
 

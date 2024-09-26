@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col justify-center items-center h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-      <h2 class="text-2xl font-semibold text-center mb-6">Sign In</h2>
+      <h2 class="text-2xl font-semibold text-center mb-6">Log In</h2>
       <form @submit.prevent="handleSubmit()">
         <div class="mb-4">
           <label for="email" class="block text-sm font-medium text-gray-700"
@@ -41,16 +41,16 @@
           type="submit"
           class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md"
         >
-          Sign In
+          Log In
         </button>
       </form>
       <div class="text-center mt-4">
         <p>Don't have an account?</p>
         <router-link
-          to="/sign-up"
+          to="/register"
           class="text-blue-500 hover:underline underline-offset-4"
         >
-          Sign up here
+          Register here
         </router-link>
       </div>
     </div>

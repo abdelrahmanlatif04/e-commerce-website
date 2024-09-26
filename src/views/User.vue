@@ -9,7 +9,7 @@ export default {
     if (id) {
       this.$router.push("/account/" + id);
     } else {
-      this.$router.push("/sign-up");
+      this.$router.push("/register");
     }
   },
 };

@@ -5,7 +5,7 @@
     <div class="relative">
       <img
         :src="product.image"
-        class="w-full aspect-square object-contain p-5 border-b"
+        class="w-full aspect-square object-contain p-3 border-b"
       />
 
       <div

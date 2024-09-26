@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-      <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+      <h2 class="text-2xl font-bold mb-6 text-center">Register</h2>
       <form @submit.prevent="handleSubmit">
         .
 
@@ -75,17 +75,17 @@
           type="submit"
           class="w-full px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         >
-          Sign Up
+          Register
         </button>
         <p class="font-semibold text-center my-2">{{ state }}</p>
       </form>
       <div class="text-center mt-4">
         <p>You already have an account?</p>
         <router-link
-          to="/sign-in"
+          to="/login"
           class="text-blue-500 hover:underline underline-offset-4"
         >
-          Sign in here
+          Log In here
         </router-link>
       </div>
       <p v-if="isEmailUsed" class="mt-2 text-sm text-center text-red-600">
