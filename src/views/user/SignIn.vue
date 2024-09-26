@@ -2,7 +2,7 @@
   <div class="flex flex-col justify-center items-center h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
       <h2 class="text-2xl font-semibold text-center mb-6">Sign In</h2>
-      <form @submit.prevent="signIn">
+      <form @submit.prevent="handleSubmit()">
         <div class="mb-4">
           <label for="email" class="block text-sm font-medium text-gray-700"
             >Email</label
@@ -86,6 +86,30 @@ export default {
         hasLetter.test(password) &&
         hasNumber.test(password)
       );
+    },
+  },
+  methods: {
+    handleSubmit() {
+      if (this.isEmailValid && this.isPasswordValid) {
+        const url =
+          "https://e-commerce-app-a727d-default-rtdb.firebaseio.com/users.json";
+        fetch(url)
+          .then((res) => res.json())
+          .then((res) => {
+            for (let e in res) {
+              if (res[e].email == this.email) {
+                if (res[e].password == this.password) {
+                  localStorage.setItem("userId", res[e].id);
+                  this.$router.push("/account/" + res[e].id);
+                  return;
+                } else {
+                  this.state = "Wrong password";
+                }
+              }
+            }
+            this.state = "This email is not registered ";
+          });
+      }
     },
   },
 };

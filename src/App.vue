@@ -11,7 +11,7 @@ import { useProductsStore } from "./stores/products";
 export default {
   data() {
     return {
-      user: useUserStore().user,
+      user: null,
     };
   },
   computed: {
@@ -23,6 +23,7 @@ export default {
   beforeCreate() {
     useProductsStore().fetchProducts();
     useUserStore().getUserLocally();
+    this.user = useUserStore().user;
   },
   components: { Nav },
 };

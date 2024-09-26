@@ -70,6 +70,7 @@
             Passwords do not match.
           </p>
         </div>
+
         <button
           type="submit"
           class="w-full px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -87,6 +88,9 @@
           Sign in here
         </router-link>
       </div>
+      <p v-if="isEmailUsed" class="mt-2 text-sm text-center text-red-600">
+        This email has been used before
+      </p>
     </div>
   </div>
 </template>
@@ -101,7 +105,14 @@ export default {
       password: null,
       rePassword: null,
       store: useUserStore(),
+      isEmailUsed: false,
     };
+  },
+  created() {
+    const id = localStorage.getItem("userId");
+    if (id != null) {
+      this.$router.push("/account/" + id);
+    }
   },
   computed: {
     isEmailValid() {
@@ -128,8 +139,52 @@ export default {
     },
   },
   methods: {
+    moveToAccount() {},
     handleSubmit() {
-      // if (this.isEmailValid && this.isPasswordMatch && this.isPasswordValid)
+      this.isEmailUsed = false;
+      if (this.isEmailValid && this.isPasswordMatch && this.isPasswordValid) {
+        const url =
+          "https://e-commerce-app-a727d-default-rtdb.firebaseio.com/users.json";
+        fetch(url)
+          .then((res) => res.json())
+          .then((res) => {
+            for (let e in res) {
+              if (res[e].email == this.email) {
+                this.isEmailUsed = true;
+              }
+            }
+          })
+          .then(() => {
+            if (!this.isEmailUsed) {
+              const id = Date.now() + "" + Math.floor(Math.random() * 10000);
+              const data = {
+                name: this.name,
+                email: this.email,
+                password: this.password,
+                id: id,
+                cart: [
+                  {
+                    id: 0,
+                    amount: 0,
+                  },
+                ],
+              };
+              const metaData = {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              };
+              fetch(url, metaData)
+                .then(() => {
+                  localStorage.setItem("userId", id);
+                  this.$router.push("/account/" + id);
+                })
+                .catch((error) => console.error("Error:", error));
+            }
+          });
+      }
     },
   },
 };
