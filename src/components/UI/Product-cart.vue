@@ -5,14 +5,14 @@
     <div class="relative">
       <img
         :src="product.image"
-        class="w-full aspect-square object-contain p-3 border-b"
+        class="w-full aspect-square object-contain p-2 border-b"
       />
 
       <div
-        class="absolute right-0 bottom-3 h-7 flex items-center bg-blue-500 text-white p-1 rounded-md"
+        class="absolute right-0 bottom-3 h-7 flex gap-1 items-center bg-blue-500 text-white p-1 rounded-md"
       >
         <img src="/star.png" class="h-5/6" />
-        <p class="font-semibold text-lg ml-1 mr-2">
+        <p class="font-semibold">
           {{ product.rating.rate }}
         </p>
         <p class="text-sm">({{ product.rating.count }})</p>

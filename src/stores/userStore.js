@@ -4,7 +4,6 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     user: {},
   }),
-  getters: {},
   actions: {
     getUserLocally() {
       let userID = localStorage.getItem("userId");
