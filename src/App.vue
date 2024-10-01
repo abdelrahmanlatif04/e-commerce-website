@@ -5,7 +5,6 @@
   </div>
 </template>
 <script>
-import { useUserStore } from "./stores/userStore";
 import Nav from "./components/UI/Nav.vue";
 import { useProductsStore } from "./stores/products";
 export default {
@@ -22,8 +21,6 @@ export default {
   },
   beforeCreate() {
     useProductsStore().fetchProducts();
-    useUserStore().getUserLocally();
-    this.user = useUserStore().user;
   },
   components: { Nav },
 };

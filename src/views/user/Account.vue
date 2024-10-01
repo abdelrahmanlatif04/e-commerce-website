@@ -1,5 +1,5 @@
 <template>
-  <p>hello, {{ user.name }}</p>
+  <p class="text-center">hello, {{ user.name }}</p>
   <p>{{ user.email }}</p>
   <p v-if="!user.cart.length">your cart is empty</p>
   <p v-else>{{ user.cart }}</p>

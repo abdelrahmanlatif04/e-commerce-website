@@ -29,7 +29,7 @@
       :product="product"
     />
   </div>
-  <div v-else class="text-black my-16 text-center text-3xl">{{ state }}</div>
+  <div v-else class="text-black mt-4 text-center text-3xl">{{ state }}</div>
 </template>
 
 <script>

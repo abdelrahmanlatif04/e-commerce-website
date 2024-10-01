@@ -80,7 +80,7 @@
         <p class="font-semibold text-center my-2">{{ state }}</p>
       </form>
       <div class="text-center mt-4">
-        <p>You already have an account?</p>
+        <p>already have an account?</p>
         <router-link
           to="/login"
           class="text-blue-500 hover:underline underline-offset-4"
@@ -180,6 +180,7 @@ export default {
                 .then(() => {
                   localStorage.setItem("userId", id);
                   this.$router.push("/account/" + id);
+                  useUserStore().setUser(id);
                 })
                 .catch((error) => console.error("Error:", error));
             }

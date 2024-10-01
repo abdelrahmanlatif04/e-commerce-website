@@ -1,7 +1,7 @@
 <template>
   <div class="relative bg-gray-100 overflow-hidden">
     <div
-      class="container mx-auto px-4 py-16 sm:py-24 md:py-32 lg:py-48 text-center text-white bg-blue-900"
+      class="container mx-auto px-4 py-16 sm:py-24 md:py-32 lg:py-48 text-center text-white bg-blue-900 rounded-b-2xl"
     >
       <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
         Welcome to Ya Balash!

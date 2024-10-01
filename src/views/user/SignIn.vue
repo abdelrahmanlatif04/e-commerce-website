@@ -44,6 +44,9 @@
           Log In
         </button>
       </form>
+      <p class="text-red-500 text-lg text-center my-1">
+        {{ state }}
+      </p>
       <div class="text-center mt-4">
         <p>Don't have an account?</p>
         <router-link
@@ -54,13 +57,12 @@
         </router-link>
       </div>
     </div>
-    <p>
-      {{ state }}
-    </p>
   </div>
 </template>
 
 <script>
+import { useUserStore } from "../../stores/userStore";
+
 export default {
   data() {
     return {
@@ -101,9 +103,11 @@ export default {
                 if (res[e].password == this.password) {
                   localStorage.setItem("userId", res[e].id);
                   this.$router.push("/account/" + res[e].id);
+                  useUserStore().setUser(res[e].id);
                   return;
                 } else {
                   this.state = "Wrong password";
+                  return;
                 }
               }
             }
