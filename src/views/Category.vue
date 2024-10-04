@@ -29,14 +29,16 @@
       :product="product"
     />
   </div>
-  <div v-else class="text-black mt-4 text-center text-3xl">{{ state }}</div>
+  <loading v-else :isLoading="load" @reload="getData()" />
 </template>
 
 <script>
 import productCart from "../components/UI/Product-cart.vue";
+import loading from "../components/UI/loading.vue";
 export default {
   data() {
     return {
+      load: true,
       categories: [
         "electronics",
         "jewelery",
@@ -45,7 +47,6 @@ export default {
         "general",
       ],
       products: [],
-      state: "Loading. . .",
     };
   },
   beforeMount() {
@@ -58,7 +59,7 @@ export default {
         this.categories = this.categories.filter(
           (item) => item != this.category
         );
-        this.state = "Loading. . .";
+        this.load = true;
         if (this.category == "general") {
           fetch("https://fakestoreapi.com/products")
             .then((res) => res.json())
@@ -66,14 +67,14 @@ export default {
               this.products = json;
             })
             .catch(() => {
-              this.state = "Error getting the data";
+              this.load = false;
             });
         } else {
           fetch(`https://fakestoreapi.com/products/category/${this.category}`)
             .then((res) => res.json())
             .then((json) => (this.products = json))
             .catch(() => {
-              this.state = "Error getting the data";
+              this.load = false;
             });
         }
       } else {
@@ -95,7 +96,7 @@ export default {
       });
     },
   },
-  components: { productCart },
+  components: { productCart, loading },
   props: {
     category: {
       type: String,

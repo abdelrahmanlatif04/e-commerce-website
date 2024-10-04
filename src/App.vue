@@ -8,14 +8,8 @@
 import Nav from "./components/UI/Nav.vue";
 import { useProductsStore } from "./stores/products";
 export default {
-  data() {
-    return {
-      user: null,
-    };
-  },
   computed: {
     userId() {
-      console.log("here");
       return localStorage.getItem("userId");
     },
   },
