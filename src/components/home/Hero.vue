@@ -45,21 +45,28 @@
         :product="product"
       />
     </div>
-    <div v-else class="text-black my-16 text-center text-3xl">{{ state }}</div>
+    <loading v-else :isLoading="load" @reload="reload()" />
   </div>
 </template>
 
 <script>
 import ProductCart from "../../components/UI/Product-cart.vue";
+import loading from "../../components/UI/loading.vue";
 import { useProductsStore } from "../../stores/products";
 export default {
   name: "HeroComponent",
   data() {
     return {
-      state: "Loading...",
+      load: true,
     };
   },
-
+  watch: {
+    products() {
+      if (!this.products) {
+        this.load = true;
+      }
+    },
+  },
   computed: {
     products() {
       let res = [];
@@ -70,6 +77,6 @@ export default {
       return res;
     },
   },
-  components: { ProductCart },
+  components: { ProductCart, loading },
 };
 </script>
