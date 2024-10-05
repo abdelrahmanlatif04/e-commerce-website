@@ -32,6 +32,8 @@
       class="mt-2 inline-block bg-blue-500 text-white py-2 px-4 rounded border-[2.5px] border-blue-500 hover:bg-transparent hover:text-blue-500 smooth font-semibold"
       >View Details</router-link
     >
+
+   <slot></slot>
   </div>
 </template>
 
