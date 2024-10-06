@@ -78,9 +78,8 @@ export default {
     },
   },
   methods: {
-    purchase() {},
-    deleteItem(productId) {
-      console.log(productId);
+    purchase() {
+      console.log("ad");
     },
     viewItem(id) {
       this.$router.push(`/product/${id}`);
